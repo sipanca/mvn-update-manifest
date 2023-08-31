@@ -5,7 +5,7 @@ pipeline {
         stage ('Update Repo Github'){
             steps {
                 script {
-                    gitBranch: 'main',
+                    git branch: 'main',
                     credentialsId: 'Github-Connection',
                     url: 'https://github.com/war3wolf/mvn-update-manifest.git'  
 
