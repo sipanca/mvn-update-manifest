@@ -12,11 +12,11 @@ pipeline {
                         git config --global user.name war3wolf
                         cat deployment.yaml
                         sed -i "s+development+${DOCKERTAG}+g" deployment.yaml
-                        cat deployment.yaml
-                        git add .
-                        git commit -m "Done by Jenkins Job update manifest:${env.BUILD_NUMBER}"
-                        git push origin HEAD:main
+                        cat deployment.yaml        
                     '''
+                    sh "git add ."
+                    sh "git commit -m 'Done by Jenkins Job update manifest:${env.BUILD_NUMBER}'"
+                    sh "git push origin HEAD:main"
                 }
             }
         }
@@ -28,11 +28,11 @@ pipeline {
         }
 
         success {
-            echo "Build image Success"
+            echo "Update Manifest Success"
         }
 
         failure {
-            echo "Build image failed"
+            echo "Update Manifest failed"
         }
 
         cleanup {
