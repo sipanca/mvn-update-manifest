@@ -5,8 +5,8 @@ pipeline {
         stage ('Update Repo Github'){
             steps {
                 script {                   
-                    def gitCreds = credentials('Github-Connection')
-                    sh '''
+                    sshagent(credentials: ['github-ssh-connection']){
+                        sh '''
                         #!/bin/bash
                         git config --global user.email panca.simanjuntak@asliri.id
                         git config --global user.name war3wolf
@@ -17,6 +17,7 @@ pipeline {
                         git commit -m 'Done by Jenkins Job update manifest:${env.BUILD_NUMBER}'
                         git push origin HEAD:development        
                     '''
+                    }                    
                 }
             }
         }
