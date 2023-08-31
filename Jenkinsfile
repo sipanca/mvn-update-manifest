@@ -9,6 +9,8 @@ pipeline {
                     //withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
    
                         withCredentials([usernamePassword(credentialsId: 'Github-Connection', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                            sh "git config user.email panca.simanjuntak@asliri.id"
+                            sh "git config user.name pancaaa"
                             sh "sed -i 's+development+${DOCKERTAG}+g' deployment.yaml"
                             sh "cat deployment.yaml"
                             sh "git add ."
