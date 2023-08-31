@@ -15,7 +15,7 @@ pipeline {
                             sh "cat deployment.yaml"
                             sh "git add ."
                             sh "git commit -m 'Done by Jenkins Job update manifest: ${env.BUILD_NUMBER}'"
-                            sh "git push --force https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/mvn-update-manifest.git HEAD:main"
+                            sh "git push --force https://github.com/war3wolf/mvn-update-manifest.git HEAD:main"
                         }
                     }
                 }
