@@ -8,8 +8,8 @@ pipeline {
                     sshagent(credentials: ['jenkins-connection']){
                         sh '''
                         #!/bin/bash
-                        git config --global user.email panca.simanjuntak@asliri.id
-                        git config --global user.name war3wolf
+                        # git config --global user.email panca.simanjuntak@asliri.id
+                        # git config --global user.name war3wolf
                         cat deployment.yaml
                         sed -i "s+development+${DOCKERTAG}+g" deployment.yaml
                         cat deployment.yaml
