@@ -13,7 +13,7 @@ pipeline {
                     sh "cat deployment.yaml"
                     sh "git add ."
                     sh "git commit -m 'Done by Jenkins Job update manifest: ${env.BUILD_NUMBER}'"
-                    sh "git push --set-upstream origin main" 
+                    sh "git push" 
                 }
             }
         }
