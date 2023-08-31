@@ -16,7 +16,7 @@ pipeline {
                         git add .
                         git commit -m "Done by Jenkins Job update manifest:${env.BUILD_NUMBER}"
                         git push origin HEAD:main
-                    ''' 
+                    '''
                 }
             }
         }
