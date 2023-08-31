@@ -8,7 +8,9 @@ pipeline {
                     git branch: 'main',
                     credentialsId: 'Github-Connection',
                     url: 'https://github.com/war3wolf/mvn-update-manifest.git'  
-
+                    
+                    sh "git config user.email panca.simanjuntak@asliri.id"
+                    sh "git config user.name pancaaa"
                     sh "cat deployment.yaml"
                     sh "sed -i 's+development+${DOCKERTAG}+g' deployment.yaml"
                     sh "cat deployment.yaml"
