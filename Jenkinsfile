@@ -2,16 +2,6 @@ pipeline {
     agent any 
  
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout your GitHub repository
-                script {
-                    def gitCreds = credentials('Github-Connection')
-                    checkout([$class: 'GitSCM', branches: [[name: 'main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: gitCreds, url: 'https://github.com/war3wolf/mvn-update-manifest.git']]])
-                }
-            }
-        }
-
         stage ('Update Repo Github'){
             steps {
                 script {                   
