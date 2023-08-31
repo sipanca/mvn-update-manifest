@@ -7,7 +7,7 @@ pipeline {
                 script {                   
                     def gitCreds = credentials('Github-Connection')
                     sh "git config user.email panca.simanjuntak@asliri.id"
-                    sh "git config user.name pancaaa"
+                    sh "git config user.name war3wolf"
                     sh "cat deployment.yaml"
                     sh "sed -i 's+development+${DOCKERTAG}+g' deployment.yaml"
                     sh "cat deployment.yaml"
