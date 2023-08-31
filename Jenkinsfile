@@ -5,19 +5,30 @@ pipeline {
         stage ('Update Repo Github'){
             steps {
                 script {
-                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    //withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
+                    gitBranch: 'main',
+                    credentialsId: 'Github-Connection',
+                    url: 'https://github.com/war3wolf/mvn-update-manifest.git'  
+
+                    sh "cat deployment.yaml"
+                    sh "sed -i 's+development+${DOCKERTAG}+g' deployment.yaml"
+                    sh "cat deployment.yaml"
+                    sh "git add ."
+                    sh "git commit -m 'Done by Jenkins Job update manifest: ${env.BUILD_NUMBER}'"
+                    sh "git push"  
+
+                    // catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    // //withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
    
-                        withCredentials([usernamePassword(credentialsId: 'Github-Connection', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                            sh "git config user.email panca.simanjuntak@asliri.id"
-                            sh "git config user.name pancaaa"
-                            sh "sed -i 's+development+${DOCKERTAG}+g' deployment.yaml"
-                            sh "cat deployment.yaml"
-                            sh "git add ."
-                            sh "git commit -m 'Done by Jenkins Job update manifest: ${env.BUILD_NUMBER}'"
-                            sh "git push --force https://github.com/war3wolf/mvn-update-manifest.git HEAD:main"
-                        }
-                    }
+                    //     withCredentials([usernamePassword(credentialsId: 'Github-Connection', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    //         sh "git config user.email panca.simanjuntak@asliri.id"
+                    //         sh "git config user.name pancaaa"
+                    //         sh "sed -i 's+development+${DOCKERTAG}+g' deployment.yaml"
+                    //         sh "cat deployment.yaml"
+                    //         sh "git add ."
+                    //         sh "git commit -m 'Done by Jenkins Job update manifest: ${env.BUILD_NUMBER}'"
+                    //         sh "git push --force https://github.com/war3wolf/mvn-update-manifest.git HEAD:main"
+                    //     }
+                    // }
                 }
 
             }
