@@ -6,14 +6,16 @@ pipeline {
             steps {
                 script {                   
                     def gitCreds = credentials('Github-Connection')
-                    sh "git config user.email panca.simanjuntak@asliri.id"
-                    sh "git config user.name war3wolf"
-                    sh "cat deployment.yaml"
-                    sh "sed -i 's+development+${DOCKERTAG}+g' deployment.yaml"
-                    sh "cat deployment.yaml"
-                    sh "git add ."
-                    sh "git commit -m 'Done by Jenkins Job update manifest: ${env.BUILD_NUMBER}'"
-                    sh "git push origin HEAD:main" 
+                    sh '''
+                        git config --global user.email panca.simanjuntak@asliri.id
+                        git config --global user.name war3wolf
+                        cat deployment.yaml
+                        sed -i 's+development+${DOCKERTAG}+g' deployment.yaml
+                        cat deployment.yaml
+                        git add ."
+                        git commit -m 'Done by Jenkins Job update manifest: ${env.BUILD_NUMBER}'
+                        git push origin HEAD:main
+                    ''' 
                 }
             }
         }
